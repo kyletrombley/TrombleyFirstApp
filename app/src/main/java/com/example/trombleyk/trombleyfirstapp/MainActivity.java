@@ -49,4 +49,13 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    public String getHexVal(int i){
+        String answer = "";
+        int temp = 0;
+        while(i > 0) {
+            temp = i % 10;
+            i = i / 10;
+
+        }
+    }
 }
