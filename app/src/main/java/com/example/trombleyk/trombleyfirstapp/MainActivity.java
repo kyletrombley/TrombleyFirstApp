@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    } //TODO stop being a winner and become a programmer
     public String getHexVal(int i){
         String answer = "";
         int temp = 0;
