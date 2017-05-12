@@ -8,4 +8,11 @@
     tools:context="com.example.trombleyk.trombleyfirstapp.MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <Button
+        android:id="@+id/cal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calculate"
+        tools:layout_editor_absoluteX="115dp"
+        tools:layout_editor_absoluteY="168dp" />
 </android.support.constraint.ConstraintLayout>
