@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         });
         final Button button = (Button) findViewById(R.id.cal);
         button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            public void onClick(View view) {
+                Snackbar.make(view, "I drive a chevrolet movie theater", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();            }
         });
     }
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    } //TODO stop being a winner and become a programmer
+    }
     public String getHexVal(int i){
         String answer = "";
         int temp = 0;
