@@ -38,10 +38,46 @@
             android:id="@+id/cal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="Interior crocodile alligator"
+            android:layout_marginBottom="93dp"
+            android:text="Calculate"
             tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/dec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/hex"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="76dp"
+            android:layout_marginStart="72dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            tools:ignore="HardcodedText,LabelFor" />
+
+        <EditText
+            android:id="@+id/hex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bin"
+            android:layout_alignStart="@+id/dec"
+            android:layout_marginBottom="63dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            tools:ignore="HardcodedText,LabelFor" />
+
+        <EditText
+            android:id="@+id/bin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/cal"
+            android:layout_alignEnd="@+id/hex"
+            android:layout_marginBottom="36dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            tools:ignore="HardcodedText,LabelFor" />
+
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
