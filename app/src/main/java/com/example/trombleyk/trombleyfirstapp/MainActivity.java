@@ -43,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
             }
             else if(bin.getText().toString().equals("")){
                 String input = hex.getText().toString();
-                dec.setText(hexToDec(input));
+                dec.setText(hexToDec(input) + "");
                 //bin.setText();
             }
             else{
                 String input = bin.getText().toString();
                // hex.setText();
-                dec.setText(binToDec(input));
+                dec.setText(binToDec(input + ""));
                 }
             }
         });
@@ -94,7 +94,22 @@ public class MainActivity extends AppCompatActivity {
         }
         return answer;
     }
-    public static int getLetterVal(char c) {
+    public static String decToHex(int i){
+        int exp = 0, base = 16, count = 0;
+        String s = "";
+        int[] arr = new int[(int)Math.log10(i) / (int)Math.log10(base)];
+        while(i > base){
+            exp = (int)Math.log10(i)/ (int)Math.log10(base);
+            i = i % (int)Math.pow(base, exp);
+            arr[count] = getLetterVal(exp);
+            count++;
+        }
+        for (int j : arr){
+            s += j;
+        }
+        return s + getLetterVal(i);
+    }
+    public static int getNumVal(char c) {
         switch (c) {
             case '1':
                 return 1;
@@ -127,7 +142,42 @@ public class MainActivity extends AppCompatActivity {
             case 'F':
                 return 15;
         }
-        return -1;
+        return 0;
+    }
+    public static char getLetterVal(int c) {
+        switch (c) {
+            case 1:
+                return '1';
+            case 2:
+                return '2';
+            case 3:
+                return '3';
+            case 4:
+                return '4';
+            case 5:
+                return '5';
+            case 6:
+                return '6';
+            case 7:
+                return '7';
+            case 8:
+                return '8';
+            case 9:
+                return '9';
+            case 10:
+                return 'a';
+            case 11:
+                return 'b';
+            case 12:
+                return 'c';
+            case 13:
+                return 'd';
+            case 14:
+                return 'e';
+            case 15:
+                return 'f';
+        }
+        return '0';
     }
 
 }
