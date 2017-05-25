@@ -20,30 +20,22 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        final Button button = (Button) findViewById(R.id.cal_btn);
-        final EditText dec = (EditText) findViewById(R.id.dec_lbl);
-        final EditText hex = (EditText) findViewById(R.id.hex_lbl);
-        final EditText bin = (EditText) findViewById(R.id.bin);
+        final Button cal = (Button) findViewById(R.id.cal_btn);
+        final EditText dec = (EditText) findViewById(R.id.dec_txt);
+        final EditText hex = (EditText) findViewById(R.id.hex_txt);
+        final EditText bin = (EditText) findViewById(R.id.bin_txt);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        cal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-            if(bin.getText().toString().equals("") && hex.getText().toString().equals("")) {
+            if(bin.getText().toString().equals("") || hex.getText().toString().equals("")) {
                 String input = dec.getText().toString();
                 int value = Integer.parseInt(input);
               //  hex.setText();
               //  bin.setText();
             }
-            else if(bin.getText().toString().equals("")){
+            else if(bin.getText().toString().equals("") || dec.getText().toString().equals("")){
                 String input = hex.getText().toString();
-                dec.setText(hexToDec(input) + "");
+                dec.setText(toStr(hexToDec(input));
                 //bin.setText();
             }
             else{
@@ -95,19 +87,40 @@ public class MainActivity extends AppCompatActivity {
         return answer;
     }
     public static String decToHex(int i){
-        int exp = 0, base = 16, count = 0;
+        int exp = 0, base = 16, index = 0;
         String s = "";
         int[] arr = new int[(int)Math.log10(i) / (int)Math.log10(base)];
+        exp = arr.length - 1;
         while(i > base){
-            exp = (int)Math.log10(i)/ (int)Math.log10(base);
+            arr[index] = i / (int)Math.pow(base, exp);
             i = i % (int)Math.pow(base, exp);
-            arr[count] = getLetterVal(exp);
-            count++;
+            index++;
+            exp--;
         }
+        arr[index] = i;
+        for (int j : arr){
+            s += getLetterVal(j);
+        }
+
+        return s;
+    }
+    public static String decToBin(int i){
+        int exp = 0, base = 2, index = 0;
+        String s = "";
+        int[] arr = new int[(int)(Math.log10(i) / Math.log10(base)) + 1];
+        exp = arr.length - 1;
+        while(i > base){
+            arr[index] = i / (int)Math.pow(base, exp);
+            i = i % (int)Math.pow(base, exp);
+            index++;
+            exp--;
+        }
+        arr[index] = i;
         for (int j : arr){
             s += j;
         }
-        return s + getLetterVal(i);
+
+        return s;
     }
     public static int getNumVal(char c) {
         switch (c) {
@@ -179,5 +192,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return '0';
     }
-
+    public String toStr(){
+        return this + "";
+    }
 }
