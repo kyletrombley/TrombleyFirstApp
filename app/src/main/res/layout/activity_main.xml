@@ -35,13 +35,78 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/cal"
+            android:id="@+id/cal.btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="Interior crocodile alligator"
+            android:layout_marginBottom="100dp"
+            android:text="Calculate"
             tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/dec.lbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="103dp"
+            android:text="Decimal"
+            tools:ignore="HardcodedText"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/hex.lbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/dec.txt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="68dp"
+            android:text="Hexadecimal"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/bin.lbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bin.txt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="17dp"
+            android:text="Binary"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/dec.txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/hex.txt"
+            android:layout_below="@+id/dec.lbl"
+            android:layout_marginTop="19dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            tools:ignore="HardcodedText,LabelFor" />
+
+        <EditText
+            android:id="@+id/hex.txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/bin.txt"
+            android:layout_below="@+id/hex.lbl"
+            android:layout_marginTop="22dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            tools:ignore="HardcodedText,LabelFor" />
+
+        <EditText
+            android:id="@+id/bin.txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/cal.btn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="21dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            tools:ignore="HardcodedText,LabelFor" />
+
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -28,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        final Button button = (Button) findViewById(R.id.cal);
-        final EditText dec = (EditText) findViewById(R.id.dec);
-        final EditText hex = (EditText) findViewById(R.id.hex);
+        final Button button = (Button) findViewById(R.id.cal_btn);
+        final EditText dec = (EditText) findViewById(R.id.dec_lbl);
+        final EditText hex = (EditText) findViewById(R.id.hex_lbl);
         final EditText bin = (EditText) findViewById(R.id.bin);
 
         button.setOnClickListener(new View.OnClickListener() {
