@@ -27,22 +27,38 @@ public class MainActivity extends AppCompatActivity {
 
         cal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-            if(bin.getText().toString().equals("") || hex.getText().toString().equals("")) {
+            //Decimal to binary
+            if(bin.getText().toString().equals("")) {
                 String input = dec.getText().toString();
                 int value = Integer.parseInt(input);
-              //  hex.setText();
-              //  bin.setText();
+                bin.setText(decToBin(value));
             }
-            else if(bin.getText().toString().equals("") || dec.getText().toString().equals("")){
+            //Decimal to hexadecimal
+            else if (hex.getText().toString().equals("")){
+                String input = dec.getText().toString();
+                int value = Integer.parseInt(input);
+                hex.setText(decToHex(value));
+            }
+            //Hexadecimal to decimal
+            else if(dec.getText().toString().equals("")){
                 String input = hex.getText().toString();
-                dec.setText(toStr(hexToDec(input));
-                //bin.setText();
+                dec.setText(toStr(hexToDec(input)));
             }
-            else{
+            //Hexadecimal to binary
+            else if (bin.getText().toString().equals("")) {
+                String input = hex.getText().toString();
+                bin.setText(decToBin(hexToDec(input)));
+            }
+            //Binary to decimal
+            else if(dec.getText().toString().equals("")){
                 String input = bin.getText().toString();
-               // hex.setText();
-                dec.setText(binToDec(input + ""));
+                dec.setText(toStr(binToDec(input)));
                 }
+            //Binary to hex
+            else if (hex.getText().toString().equals("")){
+                String input = bin.getText().toString();
+                hex.setText(decToHex(binToDec(input)));
+            }
             }
         });
     }
@@ -70,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
     }
     public static int hexToDec(String s){
         int base = 16, exp = 0, digit = 0, answer = 0;
-        for (int i  = s.length(); i >= 0; i--){
-            digit = getLetterVal(s.charAt(i));
+        for (int i  = s.length() - 1; i >= 0; i--){
+            digit = getNumVal(s.charAt(i));
             answer += digit * Math.pow(base, exp);
             exp++;
         }
@@ -79,8 +95,9 @@ public class MainActivity extends AppCompatActivity {
     }
     public static int binToDec(String s){
         int base = 2, exp = 0, digit = 0, answer = 0;
-        for (int i  = s.length(); i >= 0; i--){
-            digit = getLetterVal(s.charAt(i));
+        for (int i  = s.length() - 1; i >= 0; i--){
+            String w = "" + s.charAt(i);
+            digit = Integer.parseInt(w);
             answer += digit * Math.pow(base, exp);
             exp++;
         }
@@ -89,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     public static String decToHex(int i){
         int exp = 0, base = 16, index = 0;
         String s = "";
-        int[] arr = new int[(int)Math.log10(i) / (int)Math.log10(base)];
+        int[] arr = new int[(int)Math.log10(i) / (int)Math.log10(base) + 1];
         exp = arr.length - 1;
         while(i > base){
             arr[index] = i / (int)Math.pow(base, exp);
@@ -97,11 +114,12 @@ public class MainActivity extends AppCompatActivity {
             index++;
             exp--;
         }
-        arr[index] = i;
-        for (int j : arr){
-            s += getLetterVal(j);
+        arr[arr.length - 1] = i;
+        for (int j = 0; j < arr.length; j++){
+            if(arr[0] == 0 && arr[j] == 0)
+                continue;
+            s += getLetterVal(arr[j]);
         }
-
         return s;
     }
     public static String decToBin(int i){
@@ -115,11 +133,10 @@ public class MainActivity extends AppCompatActivity {
             index++;
             exp--;
         }
-        arr[index] = i;
+        arr[arr.length - 1] = i;
         for (int j : arr){
             s += j;
         }
-
         return s;
     }
     public static int getNumVal(char c) {
@@ -192,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return '0';
     }
-    public String toStr(){
-        return this + "";
+    public String toStr(Object o){
+        return (String) o;
     }
 }
