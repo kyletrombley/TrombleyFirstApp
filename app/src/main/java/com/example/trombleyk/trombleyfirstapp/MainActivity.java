@@ -10,8 +10,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import java.util.ArrayList;
+import java.util.List;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+import java.lang.CharSequence;
+
+
 
 public class MainActivity extends AppCompatActivity {
+    private Spinner to = (Spinner) findViewById(R.id.to);
+    private Spinner from = (Spinner) findViewById(R.id.from);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,49 +29,103 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        addItemsOnFrom();
+        addItemsOnTo();
+        final Button cal = (Button) findViewById(R.id.cal);
+        final TextView fromTxt = (TextView) findViewById(R.id.from_lbl);
+        final TextView toTxt = (TextView) findViewById(R.id.to_lbl);
+        final TextView outputTxt = (TextView) findViewById(R.id.output_lbl);
+        CharSequence fromInput = new CharSequence() {
+            @Override
+            public int length() {
+                return 0;
+            }
 
-        final Button cal = (Button) findViewById(R.id.cal_btn);
-        final EditText dec = (EditText) findViewById(R.id.dec_txt);
-        final EditText hex = (EditText) findViewById(R.id.hex_txt);
-        final EditText bin = (EditText) findViewById(R.id.bin_txt);
+            @Override
+            public char charAt(int index) {
+                return 0;
+            }
+
+            @Override
+            public CharSequence subSequence(int start, int end) {
+                return null;
+            }
+        };
+        fromTxt.setText(fromInput);
 
         cal.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-            //Decimal to binary
-            if(bin.getText().toString().equals("")) {
-                String input = dec.getText().toString();
-                int value = Integer.parseInt(input);
-                bin.setText(decToBin(value));
+            public void onClick(View view){
+                String input = "";
             }
-            //Decimal to hexadecimal
-            else if (hex.getText().toString().equals("")){
-                String input = dec.getText().toString();
-                int value = Integer.parseInt(input);
-                hex.setText(decToHex(value));
+        });
+        CharSequence toInput = new CharSequence() {
+            @Override
+            public int length() {
+                return 0;
             }
-            //Hexadecimal to decimal
-            else if(dec.getText().toString().equals("")){
-                String input = hex.getText().toString();
-                dec.setText(toStr(hexToDec(input)));
+
+            @Override
+            public char charAt(int index) {
+                return 0;
             }
-            //Hexadecimal to binary
-            else if (bin.getText().toString().equals("")) {
-                String input = hex.getText().toString();
-                bin.setText(decToBin(hexToDec(input)));
+
+            @Override
+            public CharSequence subSequence(int start, int end) {
+                return null;
             }
-            //Binary to decimal
-            else if(dec.getText().toString().equals("")){
-                String input = bin.getText().toString();
-                dec.setText(toStr(binToDec(input)));
-                }
-            //Binary to hex
-            else if (hex.getText().toString().equals("")){
-                String input = bin.getText().toString();
-                hex.setText(decToHex(binToDec(input)));
+        };
+        fromTxt.setText(toInput);
+        CharSequence outputInput = new CharSequence() {
+            @Override
+            public int length() {
+                return 0;
             }
+
+            @Override
+            public char charAt(int index) {
+                return 0;
+            }
+
+            @Override
+            public CharSequence subSequence(int start, int end) {
+                return null;
+            }
+        };
+        fromTxt.setText(outputInput);
+
+        cal.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                String input = "";
+            }
+        });
+        cal.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                String input = "";
             }
         });
     }
+
+    public void addItemsOnFrom() {
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("Decimal");
+        list.add("Hexadecimal");
+        list.add("Binary");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        from.setAdapter(dataAdapter);
+    }
+    public void addItemsOnTo() {
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("Decimal");
+        list.add("Hexadecimal");
+        list.add("Binary");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        to.setAdapter(dataAdapter);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -139,6 +203,12 @@ public class MainActivity extends AppCompatActivity {
         }
         return s;
     }
+    public static String binToHex(String s){
+        return decToHex(binToDec(s));
+    }
+    public static String hexToBin(String s){
+        return decToBin(hexToDec(s));
+    }
     public static int getNumVal(char c) {
         switch (c) {
             case '1':
@@ -160,16 +230,22 @@ public class MainActivity extends AppCompatActivity {
             case '9':
                 return 9;
             case 'A':
+            case 'a':
                 return 10;
             case 'B':
+            case 'b':
                 return 11;
             case 'C':
+            case 'c':
                 return 12;
             case 'D':
+            case 'd':
                 return 13;
             case 'E':
+            case 'e':
                 return 14;
             case 'F':
+            case 'f':
                 return 15;
         }
         return 0;
@@ -195,17 +271,17 @@ public class MainActivity extends AppCompatActivity {
             case 9:
                 return '9';
             case 10:
-                return 'a';
+                return 'A';
             case 11:
-                return 'b';
+                return 'B';
             case 12:
-                return 'c';
+                return 'C';
             case 13:
-                return 'd';
+                return 'D';
             case 14:
-                return 'e';
+                return 'E';
             case 15:
-                return 'f';
+                return 'F';
         }
         return '0';
     }

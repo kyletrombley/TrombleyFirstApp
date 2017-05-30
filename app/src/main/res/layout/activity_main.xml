@@ -20,99 +20,71 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/dec.txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/bin.lbl"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="100dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            tools:ignore="HardcodedText,LabelFor" />
-
-        <TextView
-            android:id="@+id/bin.lbl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/dec.lbl"
-            android:layout_centerVertical="true"
-            android:layout_weight="1"
-            android:text="Binary"
-            tools:ignore="HardcodedText" />
-
-        <EditText
-            android:id="@+id/bin.txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/bin.lbl"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            tools:ignore="HardcodedText,LabelFor" />
-
-        <EditText
-            android:id="@+id/hex.txt"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/cal"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="100dp"
-            android:layout_weight="1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp"
+            android:text="Calculate"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/output_lbl"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp"
             android:ems="10"
             android:inputType="textPersonName"
+            android:text=""
             tools:ignore="HardcodedText,LabelFor" />
 
-        <TextView
-            android:id="@+id/hex.lbl"
+        <Spinner
+            android:id="@+id/from"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/hex.txt"
-            android:layout_alignStart="@+id/fromBin.btn"
-            android:layout_marginStart="48dp"
-            android:layout_weight="1"
-            android:text="Hexadecimal"
+            android:layout_above="@+id/input"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="50dp" />
+
+        <Spinner
+            android:id="@+id/to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/cal"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="50dp" />
+
+        <TextView
+            android:id="@+id/from_lbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/from"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="0dp"
             tools:ignore="HardcodedText" />
 
         <TextView
-            android:id="@+id/dec.lbl"
+            android:id="@+id/output_lbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/dec.txt"
-            android:layout_centerHorizontal="true"
-            android:text="Decimal" />
+            android:layout_above="@+id/to"
+            android:layout_alignStart="@+id/to_lbl"
+            android:layout_marginBottom="50dp" />
 
-        <Button
-            android:id="@+id/button"
+        <TextView
+            android:id="@+id/to_lbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/dec.lbl"
-            android:layout_centerHorizontal="true"
-            android:text="Convert From Decimal" />
-
-        <Button
-            android:id="@+id/fromBin.btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/bin.lbl"
-            android:layout_centerHorizontal="true"
-            android:text="Convert From Binary" />
-
-        <Button
-            android:id="@+id/fromHex.btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/hex.lbl"
-            android:layout_centerHorizontal="true"
-            android:text="Convert From Hexadecimal" />
+            android:layout_above="@+id/to"
+            android:layout_alignStart="@+id/from_lbl" />
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
