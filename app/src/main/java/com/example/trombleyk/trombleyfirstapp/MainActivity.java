@@ -16,11 +16,16 @@ import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
-    private Spinner to = (Spinner) findViewById(R.id.to);
-    private Spinner from = (Spinner) findViewById(R.id.from);
+    public Spinner to;
+    public Spinner from;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+         to = (Spinner) findViewById(R.id.to);
+         from = (Spinner) findViewById(R.id.from);
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
