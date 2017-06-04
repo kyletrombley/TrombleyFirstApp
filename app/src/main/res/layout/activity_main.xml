@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -69,6 +70,7 @@
             android:layout_above="@+id/from"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="0dp"
+            android:text="Choose Base"
             tools:ignore="HardcodedText" />
 
         <TextView
@@ -76,15 +78,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/to"
-            android:layout_alignStart="@+id/to_lbl"
+            android:layout_centerHorizontal="true"
             android:layout_marginBottom="50dp" />
 
         <TextView
             android:id="@+id/to_lbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Convert To"
+            tools:ignore="HardcodedText,UnknownId"
             android:layout_above="@+id/to"
-            android:layout_alignStart="@+id/from_lbl" />
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

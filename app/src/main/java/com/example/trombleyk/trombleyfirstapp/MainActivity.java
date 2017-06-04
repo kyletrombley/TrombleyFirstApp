@@ -1,8 +1,6 @@
 package com.example.trombleyk.trombleyfirstapp;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,17 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import java.util.ArrayList;
-import java.util.List;
+
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import java.lang.CharSequence;
-
 
 
 public class MainActivity extends AppCompatActivity {
     private Spinner to = (Spinner) findViewById(R.id.to);
     private Spinner from = (Spinner) findViewById(R.id.from);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,79 +27,48 @@ public class MainActivity extends AppCompatActivity {
         addItemsOnFrom();
         addItemsOnTo();
         final Button cal = (Button) findViewById(R.id.cal);
-        final TextView fromTxt = (TextView) findViewById(R.id.from_lbl);
-        final TextView toTxt = (TextView) findViewById(R.id.to_lbl);
+        final EditText input = (EditText) findViewById(R.id.input);
         final TextView outputTxt = (TextView) findViewById(R.id.output_lbl);
-        CharSequence fromInput = new CharSequence() {
-            @Override
-            public int length() {
-                return 0;
-            }
-
-            @Override
-            public char charAt(int index) {
-                return 0;
-            }
-
-            @Override
-            public CharSequence subSequence(int start, int end) {
-                return null;
-            }
-        };
-        fromTxt.setText(fromInput);
 
         cal.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                String input = "";
+            public void onClick(View view) {
+                String s1 = from.getSelectedItem().toString();
+                String s2 = to.getSelectedItem().toString();
+                int fromVal = getConversion(s1);
+                int toVal = getConversion(s2);
+                //Decimal to hex
+                if (fromVal == 1 && toVal == 2) {
+                    outputTxt.setText(decToHex(Integer.parseInt(input.getText().toString())));
+                }
+                //Decimal to binary
+                else if (fromVal == 1 && toVal == 3) {
+                    outputTxt.setText(decToHex(Integer.parseInt(input.getText().toString())));
+                }
+                //Hex to decimal
+                else if (fromVal == 2 && toVal == 1) {
+                    outputTxt.setText(hexToDec(input.getText().toString()) + "");
+                }
+                //Hex to binary
+                else if (fromVal == 2 && toVal == 3) {
+                    outputTxt.setText(hexToBin(input.getText().toString()));
+                }
+                //Binary to decimal
+                else if (fromVal == 3 && toVal == 1) {
+                    outputTxt.setText(binToDec(input.getText().toString()));
+                }
+                //Binary to hex
+                else if (fromVal == 3 && toVal == 2) {
+                    outputTxt.setText(binToHex((input.getText().toString())));
+                }
+                //Same to same
+                else if (fromVal == toVal) {
+                    outputTxt.setText(input.getText().toString());
+                }
             }
         });
-        CharSequence toInput = new CharSequence() {
-            @Override
-            public int length() {
-                return 0;
-            }
 
-            @Override
-            public char charAt(int index) {
-                return 0;
-            }
-
-            @Override
-            public CharSequence subSequence(int start, int end) {
-                return null;
-            }
-        };
-        fromTxt.setText(toInput);
-        CharSequence outputInput = new CharSequence() {
-            @Override
-            public int length() {
-                return 0;
-            }
-
-            @Override
-            public char charAt(int index) {
-                return 0;
-            }
-
-            @Override
-            public CharSequence subSequence(int start, int end) {
-                return null;
-            }
-        };
-        fromTxt.setText(outputInput);
-
-        cal.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                String input = "";
-            }
-        });
-        cal.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view){
-                String input = "";
-            }
-        });
     }
-
+    //Fill dropdown menus
     public void addItemsOnFrom() {
         ArrayList<String> list = new ArrayList<String>();
         list.add("Decimal");
@@ -125,8 +89,6 @@ public class MainActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         to.setAdapter(dataAdapter);
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -285,7 +247,12 @@ public class MainActivity extends AppCompatActivity {
         }
         return '0';
     }
-    public String toStr(Object o){
-        return (String) o;
+    public static int getConversion(String s){
+        switch (s){
+            case "Decimal" : return 1;
+            case "Hexadecimal" : return 2;
+            case "Binary" : return 3;
+        }
+        return 0;
     }
-}
+    }
