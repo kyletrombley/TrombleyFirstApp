@@ -1,10 +1,8 @@
 package com.example.trombleyk.trombleyfirstapp;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,27 +29,29 @@ public class MainActivity extends AppCompatActivity {
         final TextView outputTxt = (TextView) findViewById(R.id.output_lbl);
         addItemsOnFrom();
         addItemsOnTo();
+        //Tells user maximum value
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String s1 = from.getSelectedItem().toString();
                 int fromVal = getConversion(s1);
                 if (fromVal == 1) {
-                    Snackbar.make(view, "max decimal value 1073741823", Snackbar.LENGTH_LONG)
+                    Snackbar.make(view, "Max Decimal Value 1073741823", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
                 else if (fromVal == 2) {
-                    Snackbar.make(view, "max hex value 3FFFFFFF", Snackbar.LENGTH_LONG)
+                    Snackbar.make(view, "Max Hex Value 3FFFFFFF", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
 
                 }
                 else if (fromVal == 3) {
-                    Snackbar.make(view, "max binary value 0011 1111 1111 1111 1111 1111 1111 1111",
+                    Snackbar.make(view, "Max Binary Value 0011 1111 1111 1111 1111 1111 1111 1111",
                             Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
             }
         });
+        //When pressed calculates given value
         cal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 String s1 = from.getSelectedItem().toString();
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    //Fill dropdown menus
+    //Fill dropdown menu from
     public void addItemsOnFrom() {
         ArrayList<String> list = new ArrayList<String>();
         list.add("Decimal");//max 1073741823
@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         from.setAdapter(dataAdapter);
     }
+    //Fill dropdown menu to
     public void addItemsOnTo() {
         ArrayList<String> list = new ArrayList<String>();
         list.add("Decimal");
@@ -202,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
     public static String hexToBin(String s){
         return decToBin(hexToDec(s));
     }
+    //Converts hex characters to their integer values
     public static int getNumVal(char c) {
         switch (c) {
             case '1':
@@ -243,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return 0;
     }
+    //Takes an integer and returns the hex character
     public static char getLetterVal(int c) {
         switch (c) {
             case 1:
@@ -278,6 +281,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return '0';
     }
+    //Converts the options of the dropdown menus to usable data
     public static int getConversion(String s){
         switch (s){
             case "Decimal" : return 1;
@@ -286,7 +290,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return 0;
     }
+    //ToString to convert integers for setting text boxes
     public static String stringOutput(int i){
         return i + "";
     }
-    }
+}

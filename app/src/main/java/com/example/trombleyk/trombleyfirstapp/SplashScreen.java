@@ -3,7 +3,6 @@ package com.example.trombleyk.trombleyfirstapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.widget.TextView;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -15,7 +14,8 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    sleep(3000);
+                    //Runs splash screen for 4000 milliseconds
+                    sleep(4000);
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -24,6 +24,7 @@ public class SplashScreen extends AppCompatActivity {
                 }
             }
         };
+        //Runs splash screen
         myThread.start();
     }
 }

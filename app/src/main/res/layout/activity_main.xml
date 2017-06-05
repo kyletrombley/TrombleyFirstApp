@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="95dp"
             android:text="Calculate"
             tools:ignore="HardcodedText" />
 
@@ -71,7 +71,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="0dp"
             android:text="Choose Base"
-            tools:ignore="HardcodedText" />
+            android:textSize="4mm"
+            tools:ignore="HardcodedText,InOrMmUsage" />
 
         <TextView
             android:id="@+id/output_lbl"
@@ -85,10 +86,11 @@
             android:id="@+id/to_lbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Convert To"
-            tools:ignore="HardcodedText,UnknownId"
             android:layout_above="@+id/to"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:text="Convert To"
+            android:textSize="4mm"
+            tools:ignore="HardcodedText,UnknownId" />
 
         <Button
             android:id="@+id/fab"
@@ -96,7 +98,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:text="Info" />
+            android:text="Info"
+            tools:ignore="HardcodedText" />
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
