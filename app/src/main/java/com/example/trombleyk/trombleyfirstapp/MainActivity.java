@@ -1,6 +1,8 @@
 package com.example.trombleyk.trombleyfirstapp;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import java.util.ArrayList;
-
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -20,21 +21,37 @@ public class MainActivity extends AppCompatActivity {
     public Spinner from;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
          to = (Spinner) findViewById(R.id.to);
          from = (Spinner) findViewById(R.id.from);
-
-
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        addItemsOnFrom();
-        addItemsOnTo();
         final Button cal = (Button) findViewById(R.id.cal);
+        final Button fab = (Button) findViewById(R.id.fab);
         final EditText input = (EditText) findViewById(R.id.input);
         final TextView outputTxt = (TextView) findViewById(R.id.output_lbl);
+        addItemsOnFrom();
+        addItemsOnTo();
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String s1 = from.getSelectedItem().toString();
+                int fromVal = getConversion(s1);
+                if (fromVal == 1) {
+                    Snackbar.make(view, "max decimal value 1073741823", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+                else if (fromVal == 2) {
+                    Snackbar.make(view, "max hex value 3FFFFFFF", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
 
+                }
+                else if (fromVal == 3) {
+                    Snackbar.make(view, "max binary value 0011 1111 1111 1111 1111 1111 1111 1111",
+                            Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            }
+        });
         cal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 String s1 = from.getSelectedItem().toString();
@@ -47,11 +64,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //Decimal to binary
                 else if (fromVal == 1 && toVal == 3) {
-                    outputTxt.setText(decToHex(Integer.parseInt(input.getText().toString())));
+                    outputTxt.setText(decToBin(Integer.parseInt(input.getText().toString())));
                 }
                 //Hex to decimal
                 else if (fromVal == 2 && toVal == 1) {
-                    outputTxt.setText(hexToDec(input.getText().toString()) + "");
+                    outputTxt.setText(stringOutput(hexToDec(input.getText().toString())));
                 }
                 //Hex to binary
                 else if (fromVal == 2 && toVal == 3) {
@@ -59,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //Binary to decimal
                 else if (fromVal == 3 && toVal == 1) {
-                    outputTxt.setText(binToDec(input.getText().toString()));
+                    outputTxt.setText(stringOutput(binToDec(input.getText().toString())));
                 }
                 //Binary to hex
                 else if (fromVal == 3 && toVal == 2) {
@@ -67,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //Same to same
                 else if (fromVal == toVal) {
-                    outputTxt.setText(input.getText().toString());
+                    outputTxt.setText("");
                 }
             }
         });
@@ -76,9 +93,9 @@ public class MainActivity extends AppCompatActivity {
     //Fill dropdown menus
     public void addItemsOnFrom() {
         ArrayList<String> list = new ArrayList<String>();
-        list.add("Decimal");
-        list.add("Hexadecimal");
-        list.add("Binary");
+        list.add("Decimal");//max 1073741823
+        list.add("Hexadecimal");//max 3FFFFFFF
+        list.add("Binary");//max 0011 1111 1111 1111 1111 1111 1111 1111
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -115,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    //Hex to decimal
     public static int hexToDec(String s){
         int base = 16, exp = 0, digit = 0, answer = 0;
         for (int i  = s.length() - 1; i >= 0; i--){
@@ -124,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return answer;
     }
+    //Binary to decimal
     public static int binToDec(String s){
         int base = 2, exp = 0, digit = 0, answer = 0;
         for (int i  = s.length() - 1; i >= 0; i--){
@@ -134,12 +153,13 @@ public class MainActivity extends AppCompatActivity {
         }
         return answer;
     }
+    //Decimal to hex
     public static String decToHex(int i){
         int exp = 0, base = 16, index = 0;
         String s = "";
         int[] arr = new int[(int)Math.log10(i) / (int)Math.log10(base) + 1];
         exp = arr.length - 1;
-        while(i > base){
+        while(i >= base){
             arr[index] = i / (int)Math.pow(base, exp);
             i = i % (int)Math.pow(base, exp);
             index++;
@@ -153,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return s;
     }
+    //Decimal to binary
     public static String decToBin(int i){
         int exp = 0, base = 2, index = 0;
         String s = "";
@@ -164,15 +185,20 @@ public class MainActivity extends AppCompatActivity {
             index++;
             exp--;
         }
-        arr[arr.length - 1] = i;
+        if(i == 1)
+            arr[arr.length - 1] = i;
+        else
+            arr[arr.length - 2] = 1;
         for (int j : arr){
             s += j;
         }
         return s;
     }
+    //Binary to hex
     public static String binToHex(String s){
         return decToHex(binToDec(s));
     }
+    //Hex to binary
     public static String hexToBin(String s){
         return decToBin(hexToDec(s));
     }
@@ -259,5 +285,8 @@ public class MainActivity extends AppCompatActivity {
             case "Binary" : return 3;
         }
         return 0;
+    }
+    public static String stringOutput(int i){
+        return i + "";
     }
     }
