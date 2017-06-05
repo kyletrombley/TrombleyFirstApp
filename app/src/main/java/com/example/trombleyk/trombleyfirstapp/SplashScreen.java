@@ -26,5 +26,7 @@ public class SplashScreen extends AppCompatActivity {
         };
         //Runs splash screen
         myThread.start();
+        //Code for splash screen
+        //https://github.com/humayuntorab/Splash-Screen/blob/master/app/src/main/java/com/example/torab/splashscreen/SplashScreen.java
     }
 }

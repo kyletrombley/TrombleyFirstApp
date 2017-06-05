@@ -72,6 +72,7 @@
             android:layout_marginBottom="0dp"
             android:text="Choose Base"
             android:textSize="4mm"
+            android:textColor="#000000"
             tools:ignore="HardcodedText,InOrMmUsage" />
 
         <TextView
@@ -90,7 +91,8 @@
             android:layout_centerHorizontal="true"
             android:text="Convert To"
             android:textSize="4mm"
-            tools:ignore="HardcodedText,UnknownId" />
+            android:textColor="#000000"
+            tools:ignore="HardcodedText,InOrMmUsage,UnknownId" />
 
         <Button
             android:id="@+id/fab"
